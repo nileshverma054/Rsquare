@@ -32,10 +32,10 @@ def login_user(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            print('logged in')
-            name = request.user.first_name
-            print(name)
-            return redirect('/dashboard/')
+            if request.user.username == 'nilesh':
+                return redirect('/dashboard/')
+            else:
+                return redirect('/')
         else:
             messages.error(request, 'Invalid username or password!')
             return redirect('/accounts/login/')
