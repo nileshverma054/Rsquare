@@ -1,9 +1,16 @@
-from django.urls import path
-from . import views
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
-urlpatterns=[
-    path('',views.home, name='home'),
-    path('signup/',views.signup, name='signup'),
-    path('login/',views.login, name='login'),
-    path('dashboard/',views.dashboard, name='dashboard'),
-]
+def home(request):
+    return render(request, 'myapp/index.html')
+
+def signup(request):
+    return render(request, 'myapp/signup.html')    
+
+def login(request):
+    return render(request, 'myapp/login.html')    
+
+@login_required
+def dashboard(request):
+    return render(request, 'myapp/dashboard.html')    
